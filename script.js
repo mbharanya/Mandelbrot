@@ -1,9 +1,67 @@
-function cleanup(){
+function cleanup() {
     const currentCanvas = document.getElementById("canvas")
-    if (currentCanvas){
+    if (currentCanvas) {
         currentCanvas.remove();
     }
 }
+window.math = require("mathjs");
+window.colormap = require('colormap')
+
+const possibleColorMaps = [
+    "alpha",
+    "autumn",
+    "bathymetry",
+    "blackbody",
+    "bluered",
+    "bone",
+    "cdom",
+    "chlorophyll",
+    "cool",
+    "copper",
+    "cubehelix",
+    "density",
+    "earth",
+    "electric",
+    "freesurface-blue",
+    "freesurface-red",
+    "greens",
+    "greys",
+    "hot",
+    "hsv",
+    "inferno",
+    "jet",
+    "magma",
+    "oxygen",
+    "par",
+    "phase",
+    "picnic",
+    "plasma",
+    "portland",
+    "rainbow",
+    "rainbow-soft",
+    "rdbu",
+    "salinity",
+    "spring",
+    "summer",
+    "temperature",
+    "turbidity",
+    "velocity-blue",
+    "velocity-green",
+    "viridis",
+    "warm",
+    "winter",
+    "yignbu",
+    "yiorrd",
+]
+
+const colorMapSelect = document.getElementById("colormap")
+
+possibleColorMaps.map(colorMapName => {
+    const option = document.createElement("option");
+    option.text = colorMapName;
+    colorMapSelect.add(option);
+})
+
 
 document.getElementById("generate").addEventListener("click", event => {
     cleanup()
@@ -41,14 +99,22 @@ document.getElementById("generate").addEventListener("click", event => {
 
             let z = math.complex({ re: 0, im: 0 })
 
-            const checkIterations = 50;
+            const checkIterations = parseFloat(document.getElementById("checkIterations").value);
+
+            let colors = colormap({
+                colormap: colorMapSelect.value,
+                nshades: checkIterations,
+                format: 'hex',
+                alpha: 1
+            })
+
 
             for (let n = 0; n <= checkIterations; n++) {
                 z = math.add(math.pow(z, 2), c)
                 const absoluteValue = z.abs()
                 const doesDiverge = absoluteValue > 4
                 if (doesDiverge) {
-                    ctx.fillStyle = rainBowColor(n, checkIterations)
+                    ctx.fillStyle = colors[n]
                     break;
                 }
                 if (n == checkIterations) {
@@ -61,9 +127,4 @@ document.getElementById("generate").addEventListener("click", event => {
         y_pixel = 0
     }
 
-
-    function rainBowColor(n, maxLength) {
-        var n = n * 240 / (maxLength);
-        return 'hsl(' + n + ',100%,50%)';
-    }
 })

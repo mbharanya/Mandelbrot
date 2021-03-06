@@ -1,0 +1,24 @@
+{
+  "name": "fractal",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": "browserify script.js -o bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbharanya/Mandelbrot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbharanya/Mandelbrot/issues"
+  },
+  "homepage": "https://github.com/mbharanya/Mandelbrot#readme",
+  "description": "",
+  "dependencies": {
+    "colormap": "^2.3.2",
+    "mathjs": "^9.2.0"
+  }
+}

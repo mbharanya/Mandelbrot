@@ -7,7 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/mathjs@9.2.0/lib/browser/math.min.js"></script>
     <form action="#">
         <label>fieldWidth:<input type="number" name="fieldWidth" id="fieldWidth" value="100"></label><br>
         <label>fieldHeight:<input type="number" name="fieldHeight" id="fieldHeight" value="100"></label>
@@ -18,9 +17,12 @@
         <label>y_start:<input type="number" name="y_start" id="y_start" value="-1.2"></label>
         <label>y_end:<input type="number" name="y_end" id="y_end" value="1.2"></label>
         <br>
+        <label>Divergence check iterations:<input type="number" name="checkIterations" id="checkIterations" value="50"></label>
+        <select name="colormap" id="colormap"></select>
 
+        <br>
         <button type="button" id="generate">Generate</button>
     </form>
-    <script src="script.js"></script>
+    <script src="bundle.js"></script>
 </body>
 </html>
