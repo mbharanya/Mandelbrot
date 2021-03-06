@@ -86623,7 +86623,7 @@ document.getElementById("generate").addEventListener("click", event => {
 
     document.body.appendChild(canvas)
 
-    // const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
     const x_start = parseFloat(document.getElementById("x_start").value)
     const x_end = parseFloat(document.getElementById("x_end").value)
