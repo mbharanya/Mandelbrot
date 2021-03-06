@@ -71,15 +71,17 @@ document.getElementById("generate").addEventListener("click", event => {
 
     canvas.id = "canvas"
 
+    // const scale = parseFloat(document.getElementById("scale").value)
+
+    canvas.style.transform = "scale(" + scale + ")";
     const fieldWidth = parseFloat(document.getElementById("fieldWidth").value)
     const fieldHeight = parseFloat(document.getElementById("fieldHeight").value)
     canvas.width = fieldWidth
     canvas.height = fieldHeight
 
-
     document.body.appendChild(canvas)
 
-    const ctx = canvas.getContext("2d");
+    // const ctx = canvas.getContext("2d");
 
     const x_start = parseFloat(document.getElementById("x_start").value)
     const x_end = parseFloat(document.getElementById("x_end").value)
