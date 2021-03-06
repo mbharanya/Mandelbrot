@@ -86604,6 +86604,8 @@ possibleColorMaps.map(colorMapName => {
     colorMapSelect.add(option);
 })
 
+colorMapSelect.value = "rainbow"
+
 
 document.getElementById("generate").addEventListener("click", event => {
     cleanup()
