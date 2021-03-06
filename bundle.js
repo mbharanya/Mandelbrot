@@ -86615,7 +86615,7 @@ document.getElementById("generate").addEventListener("click", event => {
 
     // const scale = parseFloat(document.getElementById("scale").value)
 
-    canvas.style.transform = "scale(" + scale + ")";
+    // canvas.style.transform = "scale(" + scale + ")";
     const fieldWidth = parseFloat(document.getElementById("fieldWidth").value)
     const fieldHeight = parseFloat(document.getElementById("fieldHeight").value)
     canvas.width = fieldWidth
