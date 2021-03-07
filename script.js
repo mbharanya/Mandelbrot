@@ -89,6 +89,9 @@ document.getElementById("generate").addEventListener("click", event => {
     const y_start = parseFloat(document.getElementById("y_start").value)
     const y_end = parseFloat(document.getElementById("y_end").value)
 
+    const z_start_re = parseFloat(document.getElementById("z_start_re").value)
+    const z_start_im = parseFloat(document.getElementById("z_start_im").value)
+
     let x_pixel = 0
     let y_pixel = 0
 
@@ -111,7 +114,7 @@ document.getElementById("generate").addEventListener("click", event => {
         for (let y = y_start; y <= y_end; y += fieldStepY) {
             y_pixel += 1
             const c = math.complex({ re: x, im: y })
-            let z = math.complex({ re: 0, im: 0 })
+            let z = math.complex({ re: z_start_re, im: z_start_im })
 
             let currentColor;
 
