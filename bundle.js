@@ -86613,9 +86613,6 @@ document.getElementById("generate").addEventListener("click", event => {
 
     canvas.id = "canvas"
 
-    // const scale = parseFloat(document.getElementById("scale").value)
-
-    // canvas.style.transform = "scale(" + scale + ")";
     const fieldWidth = parseFloat(document.getElementById("fieldWidth").value)
     const fieldHeight = parseFloat(document.getElementById("fieldHeight").value)
 
@@ -86640,40 +86637,52 @@ document.getElementById("generate").addEventListener("click", event => {
     let fieldStepX = (Math.abs(x_start) + Math.abs(x_end)) / fieldWidth
     let fieldStepY = (Math.abs(y_start) + Math.abs(y_end)) / fieldHeight
 
+
+    let colors = colormap({
+        colormap: colorMapSelect.value,
+        nshades: checkIterations,
+        format: 'rgba',
+        alpha: 1
+    })
+
+    const arrayBuffer = new ArrayBuffer(fieldWidth * fieldHeight * 4);
+    const pixels = new Uint8ClampedArray(arrayBuffer);
+
     for (let x = x_start; x <= x_end; x += fieldStepX) {
         x_pixel += 1
         for (let y = y_start; y <= y_end; y += fieldStepY) {
             y_pixel += 1
             const c = math.complex({ re: x, im: y })
-
             let z = math.complex({ re: 0, im: 0 })
 
-            let colors = colormap({
-                colormap: colorMapSelect.value,
-                nshades: checkIterations,
-                format: 'hex',
-                alpha: 1
-            })
-
+            let currentColor;
 
             for (let n = 0; n <= checkIterations; n++) {
                 z = math.add(math.pow(z, 2), c)
                 const absoluteValue = z.abs()
                 const doesDiverge = absoluteValue > 4
-                if (doesDiverge) {
-                    ctx.fillStyle = colors[n]
+                if (n == checkIterations) {
+                    currentColor = [0, 0, 0, 255]
+                }else if (doesDiverge) {
+                    currentColor = colors[n]
                     break;
                 }
-                if (n == checkIterations) {
-                    ctx.fillStyle = "#000000"
-                }
+
             }
 
-            ctx.fillRect(x_pixel, y_pixel, 1, 1);
+            const i = (y_pixel * fieldWidth + x_pixel) * 4;
+            pixels[i] = currentColor[0];   // red
+            pixels[i + 1] = currentColor[1];   // green
+            pixels[i + 2] = currentColor[2];   // blue
+            pixels[i + 3] = 255; // alpha
+
         }
         y_pixel = 0
     }
 
+    
+    const imageData = new ImageData(pixels, fieldWidth, fieldHeight);
+    ctx.putImageData(imageData, 0, 0);
 })
 
 },{"colormap":3,"mathjs":841}]},{},[927]);
