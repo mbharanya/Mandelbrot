@@ -86618,6 +86618,9 @@ document.getElementById("generate").addEventListener("click", event => {
     // canvas.style.transform = "scale(" + scale + ")";
     const fieldWidth = parseFloat(document.getElementById("fieldWidth").value)
     const fieldHeight = parseFloat(document.getElementById("fieldHeight").value)
+
+    const checkIterations = parseFloat(document.getElementById("checkIterations").value);
+
     canvas.width = fieldWidth
     canvas.height = fieldHeight
 
@@ -86644,8 +86647,6 @@ document.getElementById("generate").addEventListener("click", event => {
             const c = math.complex({ re: x, im: y })
 
             let z = math.complex({ re: 0, im: 0 })
-
-            const checkIterations = parseFloat(document.getElementById("checkIterations").value);
 
             let colors = colormap({
                 colormap: colorMapSelect.value,
